@@ -57,3 +57,6 @@
 
   gUefiRiscVPlatformPkgTokenSpaceGuid.PcdFwStartAddress
   gUefiRiscVPlatformPkgTokenSpaceGuid.PcdFwEndAddress
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Wno-error
