@@ -12,6 +12,7 @@
 
 #include <libfdt.h>
 #include <sbi/riscv_asm.h>
+#include <sbi/sbi_domain.h>
 #include <sbi/riscv_io.h>
 #include <sbi/riscv_encoding.h>
 #include <sbi/sbi_console.h>
@@ -160,8 +161,44 @@ static void U540_system_reset(u32 type, u32 type2)
     /* For now nothing to do. */
 }
 
+#define ROOT_EDK2_REGION    0
+#define ROOT_FW_REGION        1
+#define ROOT_ALL_REGION        2
+#define ROOT_END_REGION        3
+static struct sbi_domain_memregion root_memregs[ROOT_END_REGION + 1] = { 0 };
+
+struct sbi_domain_memregion *get_mem_regions(void) {
+    /* Root domain firmware memory region */
+    root_memregs[ROOT_FW_REGION].order = log2roundup(FixedPcdGet32(PcdFwEndAddress) - FixedPcdGet32(PcdFwStartAddress));
+    //root_memregs[ROOT_FW_REGION].base = scratch->fw_start & ~((1UL << root_memregs[0].order) - 1UL);
+    root_memregs[ROOT_FW_REGION].base = FixedPcdGet32(PcdFwStartAddress)
+        & ~((1UL << root_memregs[0].order) - 1UL);
+    // TODO: Why isn't this SBI_DOMAIN_MEMREGION_EXECUTABLE?
+    root_memregs[ROOT_FW_REGION].flags = 0;
+
+    root_memregs[ROOT_EDK2_REGION].order = log2roundup(FixedPcdGet32(PcdFwEndAddress) - FixedPcdGet32(PcdFwStartAddress));
+    //root_memregs[ROOT_FW_REGION].base = scratch->fw_start & ~((1UL << root_memregs[0].order) - 1UL);
+    root_memregs[ROOT_EDK2_REGION].base = FixedPcdGet32(PcdFwStartAddress)
+        & ~((1UL << root_memregs[0].order) - 1UL);
+    // TODO: Why isn't this SBI_DOMAIN_MEMREGION_EXECUTABLE?
+    root_memregs[ROOT_EDK2_REGION].flags = SBI_DOMAIN_MEMREGION_EXECUTABLE;
+
+    /* Root domain allow everything memory region */
+    root_memregs[ROOT_ALL_REGION].order = __riscv_xlen;
+    root_memregs[ROOT_ALL_REGION].base = 0;
+    root_memregs[ROOT_ALL_REGION].flags = (SBI_DOMAIN_MEMREGION_READABLE |
+                        SBI_DOMAIN_MEMREGION_WRITEABLE |
+                        SBI_DOMAIN_MEMREGION_EXECUTABLE);
+
+    /* Root domain memory region end */
+    root_memregs[ROOT_END_REGION].order = 0;
+
+    return root_memregs;
+}
+
 const struct sbi_platform_operations platform_ops = {
     .final_init = U540_final_init,
+    .domains_root_regions    = get_mem_regions,
     .console_putc = sifive_uart_putc,
     .console_getc = sifive_uart_getc,
     .console_init = U540_console_init,
