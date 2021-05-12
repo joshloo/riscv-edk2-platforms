@@ -273,13 +273,21 @@ const struct sbi_platform_operations platform_ops = {
 	.system_reset		= generic_system_reset,
 };
 
+#define U540_BOOTABLE_HART_COUNT FixedPcdGet32(PcdBootableHartNumber)
+static u32 U540_hart_index2id[U540_BOOTABLE_HART_COUNT] = {1, 2, 3, 4};
+
 struct sbi_platform platform = {
 	.opensbi_version	= OPENSBI_VERSION,
 	.platform_version	= SBI_PLATFORM_VERSION(0x0, 0x01),
 	.name			= "Generic",
 	.features		= SBI_PLATFORM_DEFAULT_FEATURES,
 	.hart_count		= SBI_HARTMASK_MAX_BITS,
+// TODO: Workaround for U540. I think it's because the device tree is broken
+#if FixedPcdGet32(PcdBootableHartNumber) == 4
+	.hart_index2id		= U540_hart_index2id,
+#else
 	.hart_index2id		= generic_hart_index2id,
+#endif
 	.hart_stack_size	= FixedPcdGet32(PcdOpenSbiStackSize),
 	.platform_ops_addr	= (unsigned long)&platform_ops
 };
