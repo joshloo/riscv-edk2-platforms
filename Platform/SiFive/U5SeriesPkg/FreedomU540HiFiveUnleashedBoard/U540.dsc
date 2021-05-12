@@ -166,9 +166,9 @@
   MemoryAllocationLib|MdePkg/Library/PeiMemoryAllocationLib/PeiMemoryAllocationLib.inf
 
 #
-# OpenSBi Platform Library
+# OpenSBI Platform Library
 #
-  RiscVOpensbiPlatformLib|Platform/SiFive/U5SeriesPkg/FreedomU540HiFiveUnleashedBoard/Library/OpensbiPlatformLib/OpensbiPlatformLib.inf
+  RiscVOpensbiPlatformLib|Platform/RISC-V/PlatformPkg/Library/OpensbiPlatformLib/OpensbiPlatformLib.inf
 
 [LibraryClasses.common.PEI_CORE]
   HobLib|MdePkg/Library/PeiHobLib/PeiHobLib.inf
