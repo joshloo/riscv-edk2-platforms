@@ -535,9 +535,9 @@ RISCV_PTR SecCoreStartUpWithStack
   .globl fdt_bin
 fdt_bin:
   /* TODO: Rename to a generic name and think about where we want to put this */
-#if FixedPcdGetBool (PcdStarfiveDeviceTree)
+#if FixedPcdGetBool (PcdU540DeviceTree)
   .incbin "U540.dtb"
-#elif FixedPcdGetBool (PcdU540DeviceTree)
+#elif FixedPcdGetBool (PcdStarfiveDeviceTree)
   .incbin "starfive_vic7100_beagle_v.dtb"
 #endif
 #endif
