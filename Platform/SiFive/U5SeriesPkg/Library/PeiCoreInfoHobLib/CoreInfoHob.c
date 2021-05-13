@@ -32,6 +32,7 @@
   @return EFI_SUCCESS     The PEIM initialized successfully.
 
 **/
+STATIC
 EFI_STATUS
 EFIAPI
 CreateU5MCCoreplexProcessorSpecificDataHob (
@@ -99,6 +100,7 @@ CreateU5MCCoreplexProcessorSpecificDataHob (
   @return EFI_SUCCESS     The SMBIOS Hobs were created successfully.
 
 **/
+STATIC
 EFI_STATUS
 EFIAPI
 CreateU5MCProcessorSmbiosDataHob (
@@ -168,4 +170,32 @@ CreateU5MCProcessorSmbiosDataHob (
 
   return EFI_SUCCESS;
 #endif
+}
+
+/**
+  Build processor and platform information for the U540 platform
+
+  @return EFI_SUCCESS     Status.
+
+**/
+EFI_STATUS
+BuildRiscVSmbiosHobs (
+  VOID
+)
+{
+  EFI_STATUS Status;
+  RISC_V_PROCESSOR_SMBIOS_HOB_DATA *SmbiosHobPtr;
+
+  Status = CreateU5MCCoreplexProcessorSpecificDataHob (0);
+  if (EFI_ERROR (Status)) {
+    ASSERT(FALSE);
+  }
+  Status = CreateU5MCProcessorSmbiosDataHob (0, &SmbiosHobPtr);
+  if (EFI_ERROR (Status)) {
+    ASSERT(FALSE);
+  }
+
+  DEBUG ((DEBUG_INFO, "U5 MC Coreplex SMBIOS DATA HOB at address 0x%x\n", SmbiosHobPtr));
+
+  return EFI_SUCCESS;
 }
