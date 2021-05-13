@@ -416,7 +416,7 @@
     NULL|MdeModulePkg/Library/LzmaCustomDecompressLib/LzmaCustomDecompressLib.inf
   }
 
-  Platform/BeagleV/Universal/Pei/PlatformPei/PlatformPei.inf {
+  Platform/RISC-V/PlatformPkg/Universal/Pei/PlatformPei/PlatformPei.inf {
     <LibraryClasses>
       PcdLib|MdePkg/Library/PeiPcdLib/PeiPcdLib.inf
   }
