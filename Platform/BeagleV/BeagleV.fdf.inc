@@ -54,15 +54,12 @@ SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdTemporaryRamSize = 0x10000
 
 
 SET gUefiRiscVPkgTokenSpaceGuid.PcdRiscVMachineTimerFrequencyInHerz    = 1000000
-SET gSiFiveU5SeriesPlatformsPkgTokenSpaceGuid.PcdU5PlatformSystemClock = 1500000000 # 1.5GHz system clock
 # TODO: This can be dynamically configured in QEMU
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdHartCount                   = 2          # Total cores on BeagleV platform
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootHartId                  = 0          # Boot hart ID
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootableHartNumber          = 1          # The bootable hart core number.
                                                                                     # Which is incorporate with OpenSBI
                                                                                     # platform hart_index2id value.
-SET gSiFiveU5SeriesPlatformsPkgTokenSpaceGuid.PcdNumberofU5Cores       = 2          # Total U74 cores enabled on BeagleV platform
-SET gSiFiveU5SeriesPlatformsPkgTokenSpaceGuid.PcdE5MCSupported         = False      # E51 MC does not exist
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdPeiCorePrivilegeMode        = 1          # Set PeiCore to S-Mode
 
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdGetDeviceTreeFromQemu       = False
