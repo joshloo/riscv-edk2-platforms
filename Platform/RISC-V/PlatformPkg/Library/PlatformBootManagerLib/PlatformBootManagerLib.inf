@@ -30,7 +30,6 @@
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  OvmfPkg/OvmfPkg.dec
   Platform/RISC-V/PlatformPkg/RiscVPlatformPkg.dec
 
 [LibraryClasses]
@@ -50,7 +49,6 @@
 
 [Guids]
   gEfiEndOfDxeEventGroupGuid
-  gRootBridgesConnectedEventGroupGuid
 
 [Protocols]
   gEfiGenericMemTestProtocolGuid  ## CONSUMES
