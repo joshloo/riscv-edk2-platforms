@@ -55,4 +55,4 @@ SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootableHartNumber          = 1      
                                                                                     # platform hart_index2id value.
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdPeiCorePrivilegeMode        = 1          # Set PeiCore to S-Mode
 
-SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdGetDeviceTreeFromQemu       = True
+SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdQemuDeviceTreeAddress       = 0x1020

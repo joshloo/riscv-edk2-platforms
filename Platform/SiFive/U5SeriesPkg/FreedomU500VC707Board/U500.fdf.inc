@@ -59,6 +59,3 @@ SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootHartId                  = 0      
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdPeiCorePrivilegeMode        = 1         # Set PeiCore to S-Mode
 
 SET gSiFiveU5SeriesPlatformsPkgTokenSpaceGuid.PcdU5UartBase = 0x54000000
-
-SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdGetDeviceTreeFromQemu       = False
-SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdU540DeviceTree              = True

@@ -64,6 +64,3 @@ SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootableHartNumber          = 1      
                                                                                     # Which is incorporate with OpenSBI
                                                                                     # platform hart_index2id value.
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdPeiCorePrivilegeMode        = 1          # Set PeiCore to S-Mode
-
-SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdGetDeviceTreeFromQemu       = False
-SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdStarfiveDeviceTree          = True
