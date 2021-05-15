@@ -703,7 +703,7 @@ VOID EFIAPI SecCoreStartUpWithStack(
           + 0x18  // File header size
           + 0x04; // Section header size
   } else {
-      DEBUG ((DEBUG_ERROR, "Must use DTB either from QEMU or compiled in FW. PCDs configured incorrectly.\n");
+      DEBUG ((DEBUG_ERROR, "Must use DTB either from QEMU or compiled in FW. PCDs configured incorrectly.\n"));
       ASSERT (FALSE);
   }
   DEBUG ((DEBUG_INFO, "DTB address: 0x%08x\n", Scratch->next_arg1));
