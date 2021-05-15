@@ -10,7 +10,7 @@
 
 [Defines]
   INF_VERSION    = 0x0001001A
-  BASE_NAME      = OverdriveBoardDeviceTree
+  BASE_NAME      = BeagleVStarlightDeviceTree
   FILE_GUID      = 25462CDA-221F-47DF-AC1D-259CFAA4E326 # gDtPlatformDefaultDtbFileGuid
   MODULE_TYPE    = USER_DEFINED
   VERSION_STRING = 1.0
