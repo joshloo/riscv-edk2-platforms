@@ -56,7 +56,7 @@ SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdTemporaryRamBase = $(CODE_BASE_ADDRES
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdTemporaryRamSize = 0x10000
 
 
-SET gUefiRiscVPkgTokenSpaceGuid.PcdRiscVMachineTimerFrequencyInHerz    = 1000000
+SET gUefiRiscVPkgTokenSpaceGuid.PcdRiscVMachineTimerFrequencyInHerz    = 6250000
 # TODO: This can be dynamically configured in QEMU
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdHartCount                   = 2          # Total cores on BeagleV platform
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootHartId                  = 0          # Boot hart ID
