@@ -120,6 +120,9 @@
   DebugPrintErrorLevelLib|MdePkg/Library/BaseDebugPrintErrorLevelLib/BaseDebugPrintErrorLevelLib.inf
 
 !if $(SECURE_BOOT_ENABLE) == TRUE
+  RngLib|MdePkg/Library/BaseRngLibTimerLib/BaseRngLibTimerLib.inf
+  PlatformSecureLib|OvmfPkg/Library/PlatformSecureLib/PlatformSecureLib.inf
+  FileExplorerLib|MdeModulePkg/Library/FileExplorerLib/FileExplorerLib.inf
   IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
   OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLib.inf
   TpmMeasurementLib|SecurityPkg/Library/DxeTpmMeasurementLib/DxeTpmMeasurementLib.inf
@@ -577,11 +580,12 @@
   #
   # FAT filesystem + GPT/MBR partitioning + UDF filesystem
   #
-  #MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
-  #MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
-  #MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
+  MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
+  MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
+  MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
   FatPkg/EnhancedFatDxe/Fat.inf
   MdeModulePkg/Universal/Disk/UdfDxe/UdfDxe.inf
+  OvmfPkg/VirtioFsDxe/VirtioFsDxe.inf
 
   OvmfPkg/LinuxInitrdDynamicShellCommand/LinuxInitrdDynamicShellCommand.inf {
     <PcdsFixedAtBuild>
@@ -615,10 +619,25 @@
   }
 
 !if $(SECURE_BOOT_ENABLE) == TRUE
+  MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf {
+    <LibraryClasses>
+      NULL|SecurityPkg/Library/DxeImageVerificationLib/DxeImageVerificationLib.inf
+  }
   SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
+  OvmfPkg/EnrollDefaultKeys/EnrollDefaultKeys.inf {
+    <LibraryClasses>
+      ShellCEntryLib|ShellPkg/Library/UefiShellCEntryLib/UefiShellCEntryLib.inf
+  }
+!else
+  MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
 !endif
 
-  MdeModulePkg/Application/UiApp/UiApp.inf
+  MdeModulePkg/Application/UiApp/UiApp.inf {
+    <LibraryClasses>
+      NULL|MdeModulePkg/Library/DeviceManagerUiLib/DeviceManagerUiLib.inf
+      NULL|MdeModulePkg/Library/BootManagerUiLib/BootManagerUiLib.inf
+      NULL|MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerUiLib.inf
+  }
 
 [PcdsDynamicDefault.common]
   # set PcdPciExpressBaseAddress to MAX_UINT64, which signifies that this
