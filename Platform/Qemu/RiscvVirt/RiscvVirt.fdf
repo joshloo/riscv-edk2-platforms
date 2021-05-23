@@ -198,10 +198,20 @@ INF  MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
 INF  MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
 INF  MdeModulePkg/Bus/Scsi/ScsiBusDxe/ScsiBusDxe.inf
 INF  MdeModulePkg/Bus/Scsi/ScsiDiskDxe/ScsiDiskDxe.inf
+INF  OvmfPkg/SataControllerDxe/SataControllerDxe.inf
+INF  MdeModulePkg/Bus/Ata/AtaAtapiPassThru/AtaAtapiPassThru.inf
+INF  MdeModulePkg/Bus/Ata/AtaBusDxe/AtaBusDxe.inf
 INF  MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
 INF  MdeModulePkg/Universal/SetupBrowserDxe/SetupBrowserDxe.inf
 INF  MdeModulePkg/Universal/DisplayEngineDxe/DisplayEngineDxe.inf
 INF  MdeModulePkg/Universal/MemoryTest/NullMemoryTestDxe/NullMemoryTestDxe.inf
+
+INF  OvmfPkg/SioBusDxe/SioBusDxe.inf
+!if $(SOURCE_DEBUG_ENABLE) == FALSE
+INF  MdeModulePkg/Bus/Pci/PciSioSerialDxe/PciSioSerialDxe.inf
+!endif
+INF  MdeModulePkg/Bus/Isa/Ps2KeyboardDxe/Ps2KeyboardDxe.inf
+
 INF  FatPkg/EnhancedFatDxe/Fat.inf
 INF  MdeModulePkg/Universal/Disk/UdfDxe/UdfDxe.inf
 INF  Silicon/RISC-V/ProcessorPkg/Universal/FdtDxe/FdtDxe.inf
@@ -235,6 +245,17 @@ INF  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
+
+!ifdef $(CSM_ENABLE)
+INF  OvmfPkg/Csm/BiosThunk/VideoDxe/VideoDxe.inf
+INF  OvmfPkg/Csm/LegacyBiosDxe/LegacyBiosDxe.inf
+INF  RuleOverride=CSM OvmfPkg/Csm/Csm16/Csm16.inf
+!else
+INF  OvmfPkg/QemuVideoDxe/QemuVideoDxe.inf
+!endif
+
+INF  OvmfPkg/QemuRamfbDxe/QemuRamfbDxe.inf
+INF  OvmfPkg/VirtioGpuDxe/VirtioGpu.inf
 
 INF  MdeModulePkg/Application/UiApp/UiApp.inf
 
