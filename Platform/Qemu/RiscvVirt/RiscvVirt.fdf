@@ -105,6 +105,12 @@ INF Platform/RISC-V/PlatformPkg/Universal/FdtPeim/FdtPeim.inf
 # RISC-V Platform PEI Driver
 INF  Platform/RISC-V/PlatformPkg/Universal/Pei/PlatformPei/PlatformPei.inf
 
+!if $(TPM_ENABLE) == TRUE
+INF  OvmfPkg/Tcg/Tcg2Config/Tcg2ConfigPei.inf
+INF  SecurityPkg/Tcg/TcgPei/TcgPei.inf
+INF  SecurityPkg/Tcg/Tcg2Pei/Tcg2Pei.inf
+!endif
+
 ################################################################################
 
 [FV.DXEFV]
@@ -258,6 +264,17 @@ INF  OvmfPkg/QemuRamfbDxe/QemuRamfbDxe.inf
 INF  OvmfPkg/VirtioGpuDxe/VirtioGpu.inf
 
 INF  MdeModulePkg/Application/UiApp/UiApp.inf
+
+#
+# TPM support
+#
+!if $(TPM_ENABLE) == TRUE
+INF  SecurityPkg/Tcg/TcgDxe/TcgDxe.inf
+INF  SecurityPkg/Tcg/Tcg2Dxe/Tcg2Dxe.inf
+!if $(TPM_CONFIG_ENABLE) == TRUE
+INF  SecurityPkg/Tcg/Tcg2Config/Tcg2ConfigDxe.inf
+!endif
+!endif
 
 ################################################################################
 
